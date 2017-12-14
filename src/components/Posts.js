@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import * as actions from '../actions'
 
 class Posts extends Component {
@@ -10,9 +11,10 @@ class Posts extends Component {
 
     renderPost(post) {
         return (
-            <li key={post.title}>
-                {post.title}
-            </li>
+            <div key={post.title}>
+                <h3>{post.title}</h3>
+                <p>{post.body}</p>
+            </div>
         )
     }
 
