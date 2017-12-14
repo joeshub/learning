@@ -1,4 +1,4 @@
-// handle asyn actions
+// handle async actions
 export default store => next => action => {
     // if the action does not have a paylod
     // or the the payload doesnt have a .then property
