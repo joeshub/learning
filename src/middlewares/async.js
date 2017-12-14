@@ -1,5 +1,5 @@
 // handle asyn actions
-export default ({dispatch}) => next => action => {
+export default store => next => action => {
     // if the action does not have a paylod
     // or the the payload doesnt have a .then property
     // we skip it and send it to the 'next' middleware or root reducer
@@ -17,6 +17,6 @@ export default ({dispatch}) => next => action => {
         const newAction = {...action, payload: response}
         // now we need to send the action through all
         // our middleware again, so we use 'dispatch', not 'next'
-        dispatch(newAction)
+        store.dispatch(newAction)
     })
 }
