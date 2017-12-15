@@ -1,21 +1,6 @@
-// import {createStore} from 'redux'
+import async from './middlewares/async'
+import { createStore, applyMiddleware } from 'redux'
 
-// const reducer = (state, action) => {
-//     switch (action.type) {
-//         case 'ADD_POST':
-//         state.posts.push()
-//     }
-//     return state
-// }
+import reducers from './reducers'
 
-// const initialState = {
-//     posts: [],
-//     comments: [],
-//     users: []
-// }
-
-// const store = createStore(reducer)
-
-// window.store = store
-
-// export {store}
+export default createStore(reducers, applyMiddleware(async))
