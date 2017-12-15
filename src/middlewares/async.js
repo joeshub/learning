@@ -14,7 +14,10 @@ export default store => next => action => {
     // create a new Action with the old Type
     // but replace the payload with the response
     // from our promise
-    const newAction = { ...action, payload: response }
+    const newAction = {
+      ...action,
+      payload: response
+    }
     // now we need to send the action through all
     // our middleware again, so we use 'dispatch', not 'next'
     store.dispatch(newAction)
