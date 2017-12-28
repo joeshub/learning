@@ -1,6 +1,9 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import reduxThunk from 'redux-thunk'
 
-import async from './middlewares/async'
 import reducers from './reducers'
 
-export default createStore(reducers, applyMiddleware(async))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+export default createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)))
+

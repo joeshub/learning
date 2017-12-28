@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import * as actions from '../actions'
+import * as thunks from '../thunks'
 
 class Posts extends Component {
   componentWillMount () {
-    this.props.fetchPosts()
+    // if user info is valid we show posts, otherwise a login error message
+    // change 'pass' to something else to test
+    this.props.fetchPosts({
+      email: 'dummy@gmail.com',
+      password: 'pass'
+    })
   }
 
   renderPost (post) {
@@ -18,14 +23,19 @@ class Posts extends Component {
   }
 
   render () {
+    const { user } = this.props
+    if (user.error) {
+      return <h2>Login Error</h2>
+    }
     return <ul>{this.props.posts.map(this.renderPost)}</ul>
   }
 }
 
-function mapStateToProps (state) {
+const mapStateToProps = (state) => {
   return {
+    user: state.user,
     posts: state.posts
   }
 }
 
-export default connect(mapStateToProps, actions)(Posts)
+export default connect(mapStateToProps, thunks)(Posts)
