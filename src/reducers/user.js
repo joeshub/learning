@@ -6,13 +6,14 @@ export default (state = {}, action) => {
   case USER_AUTHORIZED:
     return {
       ...state,
-      ...action.payload.data
+      email: action.payload.data.email
     }
 
   case USER_NOT_AUTHORIZED:
+    const errorMessage = action.payload.response ? action.payload.response.data.error : action.payload.message
     return {
       ...state,
-      ...action.payload.response.data
+      error: errorMessage
     }
 
   default:

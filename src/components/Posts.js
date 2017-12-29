@@ -23,9 +23,9 @@ class Posts extends Component {
   }
 
   render () {
-    const { user } = this.props
-    if (user.error) {
-      return <h2>Login Error</h2>
+    const { user: { error } } = this.props
+    if (error) {
+      return <h2>Error: {error}</h2>
     }
     return <ul>{this.props.posts.map(this.renderPost)}</ul>
   }
