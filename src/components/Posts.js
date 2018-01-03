@@ -20,7 +20,6 @@ class Posts extends Component {
   }
 
   render () {
-    debugger
     return (
       <section>
         {this.props.posts.map(this.renderPostItem)}

@@ -31,7 +31,7 @@ export const fetchPosts = () => {
   }
 }
 
-export const fetchCart = ({ email, password }) => {
+export const fetchUser = ({ email, password }) => {
   return (dispatch) => {
     axios.post(`${API_ROOT}/signin`, { email, password })
       .then(response => {

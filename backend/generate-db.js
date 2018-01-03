@@ -19,7 +19,7 @@ function generateDB () {
   for (let id = 0; id < 6; id++) {
     let name = faker.commerce.productName()
     let description = faker.lorem.words(12)
-    let price = faker.commerce.price()
+    let price = faker.commerce.price(12, 100, 2)
 
     cart.push({
       'id': id,
