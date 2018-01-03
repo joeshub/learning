@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+
+import Nav from './Nav'
 import Posts from './Posts'
 
 export default class App extends Component {
   render () {
     return (
       <div className="App">
-        <Posts />
+        <Nav />
+        {/* <Posts /> */}
+        {this.props.children}
       </div>
     )
   }

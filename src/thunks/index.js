@@ -1,7 +1,12 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../constants'
-import { FETCH_POSTS, USER_AUTHORIZED, USER_NOT_AUTHORIZED } from '../constants/types'
+import {
+  FETCH_POSTS,
+  FETCH_CART,
+  USER_AUTHORIZED,
+  USER_NOT_AUTHORIZED
+} from '../constants/types'
 
 // redux-thunk lets you return a function from your action creator
 // the first argument is the dispatch method, second is getState
@@ -14,7 +19,19 @@ import { FETCH_POSTS, USER_AUTHORIZED, USER_NOT_AUTHORIZED } from '../constants/
 //         dispatch(anotherAction({foo, bar, myString}))
 //     }
 // }
-export const fetchPosts = ({ email, password }) => {
+export const fetchPosts = () => {
+  return (dispatch) => {
+    axios.get(`${API_ROOT}/posts`)
+      .then((response) => {
+        return dispatch({
+          type: FETCH_POSTS,
+          payload: response
+        })
+      })
+  }
+}
+
+export const fetchCart = ({ email, password }) => {
   return (dispatch) => {
     axios.post(`${API_ROOT}/signin`, { email, password })
       .then(response => {
@@ -22,10 +39,10 @@ export const fetchPosts = ({ email, password }) => {
           type: USER_AUTHORIZED,
           payload: response
         })
-        axios.get(`${API_ROOT}/posts`)
+        axios.get(`${API_ROOT}/cart`)
           .then((response) => {
             return dispatch({
-              type: FETCH_POSTS,
+              type: FETCH_CART,
               payload: response
             })
           })

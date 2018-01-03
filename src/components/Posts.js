@@ -7,13 +7,10 @@ class Posts extends Component {
   componentWillMount () {
     // if user info is valid we show posts, otherwise a login error message
     // change 'pass' to something else to test
-    this.props.fetchPosts({
-      email: 'dummy@gmail.com',
-      password: 'pass'
-    })
+    this.props.fetchPosts()
   }
 
-  renderPost (post) {
+  renderPostItem (post) {
     return (
       <div key={ post.title }>
         <h3>{post.title}</h3>
@@ -23,17 +20,17 @@ class Posts extends Component {
   }
 
   render () {
-    const { user: { error } } = this.props
-    if (error) {
-      return <h2>Error: {error}</h2>
-    }
-    return <ul>{this.props.posts.map(this.renderPost)}</ul>
+    debugger
+    return (
+      <section>
+        {this.props.posts.map(this.renderPostItem)}
+      </section>
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     posts: state.posts
   }
 }
