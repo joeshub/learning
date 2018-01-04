@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import store from './store'
 import Nav from './components/Nav'
-import App from './components/App'
+import { getComponent, onLoad } from './components/App'
 import Posts from './components/Posts'
 import User from './components/User'
 import Cart from './components/Cart'
@@ -15,7 +15,7 @@ import Async from './components/Async'
 ReactDOM.render(
   <Provider store={ store }>
     <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
+      <Route path="/" component={ Async(getComponent, onLoad) }>
         <IndexRoute components={ { nav: Nav, main: () => <div>Homepage</div> } } />
         <Route path="posts" components={ { nav: Nav, main: Posts } } />
         <Route path="user" components={ { nav: Nav, main: User } }>

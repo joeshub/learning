@@ -1,26 +1,25 @@
-import { FETCH_POSTS } from '../constants/types'
-import update from 'immutability-helper'
+import { FETCH_POSTS, FETCH_POSTS_ERROR } from '../constants/types'
 
-export default (state = [], action) => {
+const initialState = {
+  list: [],
+  error: null
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
 
   case FETCH_POSTS:
-    console.log('state', state)
-    console.log('action.payload.data', action.payload.data)
-    return [
+    return {
       ...state,
-      ...action.payload.data
-    ]
-    // return Object.assign({}, state, action.payload.data)
-    // return [ ...merge({}, state, action.payload.data) ]
-    // return [
-    //   ...state,
-    //   ...action.payload.data.reduce((obj, post) => {
-    //     obj[post.id] = post
-    //     return obj
-    //   }, [])
-    // ]
-    // return update(state, action.payload.data)
+      list: [ ...action.payload.data ]
+    }
+
+  case FETCH_POSTS_ERROR:
+    return {
+      ...state,
+      error: action.payload.message
+    }
+
   default:
     return state
 

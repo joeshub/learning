@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import * as thunks from '../thunks'
-
 class Posts extends Component {
-  componentWillMount () {
-    // if user info is valid we show posts, otherwise a login error message
-    // change 'pass' to something else to test
-    this.props.fetchPosts()
-  }
 
   renderPostItem (post) {
     return (
@@ -20,9 +13,15 @@ class Posts extends Component {
   }
 
   render () {
+    const { posts, posts: { error } } = this.props
+
+    if (error) {
+      return <h2>Error: {error}</h2>
+    }
+
     return (
       <section>
-        {this.props.posts.map(this.renderPostItem)}
+        {posts.list.map(this.renderPostItem)}
       </section>
     )
   }
@@ -34,4 +33,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, thunks)(Posts)
+export default connect(mapStateToProps, null)(Posts)

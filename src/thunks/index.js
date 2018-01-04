@@ -1,8 +1,13 @@
 import axios from 'axios'
 
-import { API_ROOT } from '../constants'
+import {
+  API_ROOT,
+  NETWORK_ERROR,
+  API_SERVER_MESSAGE
+} from '../constants'
 import {
   FETCH_POSTS,
+  FETCH_POSTS_ERROR,
   FETCH_CART,
   USER_AUTHORIZED,
   USER_NOT_AUTHORIZED
@@ -21,13 +26,23 @@ import {
 // }
 export const fetchPosts = () => {
   return (dispatch) => {
-    axios.get(`${API_ROOT}/posts`)
-      .then((response) => {
-        return dispatch({
-          type: FETCH_POSTS,
-          payload: response
+    //simulate a 500ms delay
+    setTimeout(() => {
+      axios.get(`${API_ROOT}/posts`)
+        .then((response) => {
+          return dispatch({
+            type: FETCH_POSTS,
+            payload: response
+          })
         })
-      })
+        .catch(response => {
+          response.message === NETWORK_ERROR ? response.message = API_SERVER_MESSAGE : null
+          dispatch({
+            type: FETCH_POSTS_ERROR,
+            payload: response
+          })
+        })
+    }, 500)
   }
 }
 
@@ -41,14 +56,15 @@ export const fetchUser = ({ email, password }) => {
         })
         axios.get(`${API_ROOT}/cart`)
           .then((response) => {
-            return dispatch({
+            dispatch({
               type: FETCH_CART,
               payload: response
             })
           })
       })
       .catch(response => {
-        return dispatch({
+        response.message === NETWORK_ERROR ? response.message = API_SERVER_MESSAGE : null
+        dispatch({
           type: USER_NOT_AUTHORIZED,
           payload: response
         })

@@ -1,34 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 class Async extends Component {
 
   componentDidMount () {
-    if (this.props.onLoad) {
-      this.props.onLoad()
-    }
+    this.props.onLoad()
   }
 
   render () {
-    let { Render } = this.props
+    let { RenderComponent } = this.props
+
+    if (!RenderComponent) {
+      return <div>...loading</div>
+    }
+
     return (
-      <Render />
+      <RenderComponent { ...this.props } />
     )
   }
 }
 
-
-const anyncRoute = (mapTo, onLoad = () => { }) => connect(
-  (state) => (
-    {
-      Render: mapTo(state)
+const anyncRoute = (getComponent, onLoad = () => { }) => connect(
+  (state, ownProps) => {
+    return (
+      {
+        RenderComponent: getComponent(state, ownProps)
+      }
+    )
+  },
+  (dispatch, ownProps) => {
+    return {
+      onLoad: () => onLoad(dispatch, ownProps)
     }
-  ),
-  (dispatch) => (
-    {
-      onLoad: () => onLoad(dispatch)
-    }
-  )
+  }
 )(Async)
 
 export default anyncRoute

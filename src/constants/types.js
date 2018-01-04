@@ -2,4 +2,8 @@ export const USER_AUTHORIZED = 'USER_AUTHORIZED'
 export const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
+export const FETCH_POSTS_ERROR = 'FETCH_POSTS_ERROR'
+
 export const FETCH_CART = 'FETCH_CART'
+
+export const USE_BETA = 'USE_BETA'

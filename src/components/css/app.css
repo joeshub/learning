@@ -1,0 +1,10 @@
+.app {
+    font-family: serif;
+}
+
+.app__beta {
+    font-family: sans-serif;
+    background-color: peachpuff;
+    padding: 10px;
+}
+
