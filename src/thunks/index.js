@@ -36,7 +36,7 @@ export const fetchPosts = () => {
           })
         })
         .catch(response => {
-          response.message === NETWORK_ERROR ? response.message = API_SERVER_MESSAGE : null
+          if (response.message === NETWORK_ERROR) response.message = API_SERVER_MESSAGE
           dispatch({
             type: FETCH_POSTS_ERROR,
             payload: response
@@ -63,7 +63,7 @@ export const fetchUser = ({ email, password }) => {
           })
       })
       .catch(response => {
-        response.message === NETWORK_ERROR ? response.message = API_SERVER_MESSAGE : null
+        if (response.message === NETWORK_ERROR) response.message = API_SERVER_MESSAGE
         dispatch({
           type: USER_NOT_AUTHORIZED,
           payload: response

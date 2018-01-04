@@ -7,14 +7,14 @@ class Async extends Component {
   }
 
   render () {
-    let { RenderComponent } = this.props
+    let { RenderComponent, ...otherProps } = this.props
 
     if (!RenderComponent) {
       return <div>...loading</div>
     }
 
     return (
-      <RenderComponent { ...this.props } />
+      <RenderComponent { ...otherProps } />
     )
   }
 }
