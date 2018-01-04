@@ -9,4 +9,8 @@ Branches progressively build on a simple app
 ## thunks
 - add user auth api backend
 - use redux thunk to dispatch actions inside actions
-
+## router
+- add react-router
+- use index and nested routes
+- use protected routers
+- use async routes for data fetching
