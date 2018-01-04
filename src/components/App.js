@@ -5,11 +5,13 @@ import Posts from './Posts'
 
 export default class App extends Component {
   render () {
+    const { nav, main } = this.props
+
     return (
       <div className="App">
-        <Nav />
-        {/* <Posts /> */}
-        {this.props.children}
+        {nav}
+        <hr />
+        {main}
       </div>
     )
   }
