@@ -10,6 +10,7 @@ import Posts from './components/Posts'
 import User from './components/User'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
+import Async from './components/Async'
 
 ReactDOM.render(
   <Provider store={ store }>
